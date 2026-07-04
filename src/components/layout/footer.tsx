@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { Container } from "../common/container";
 import { siteConfig } from "@/constants/site";
+import { Logo } from "./navbar/logo";
 
 const footerLinks = [
   {
@@ -41,15 +42,7 @@ export function Footer() {
         <div className="grid grid-cols-1 gap-10 lg:grid-cols-12 lg:gap-8">
           {/* Brand block */}
           <div className="lg:col-span-4">
-            <Link
-              href="/"
-              className="flex items-center gap-2.5 font-heading text-xl font-bold tracking-tight text-slate-900"
-            >
-              <div className="flex h-9 w-9 items-center justify-center rounded-lg bg-blue-600 text-white font-extrabold shadow-md shadow-blue-500/20">
-                C
-              </div>
-              <span>CBS <span className="text-blue-600">Software</span></span>
-            </Link>
+            <Logo />
             <p className="mt-6 max-w-sm text-sm leading-relaxed text-slate-500">
               Transforming businesses through smart digital solutions. We help startups, SMEs, and enterprises establish a powerful digital presence.
             </p>

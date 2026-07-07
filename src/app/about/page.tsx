@@ -3,7 +3,8 @@
 import { motion } from "framer-motion";
 import Link from "next/link";
 import { Container } from "@/components/common/container";
-import { Button } from "@/components/ui/button";
+import { Button, buttonVariants } from "@/components/ui/button";
+import { cn } from "@/lib/utils";
 import {
   Sparkles,
   Trophy,
@@ -430,12 +431,24 @@ export default function AboutPage() {
             </p>
 
             <div className="mt-10 flex flex-wrap justify-center gap-4">
-              <Button size="lg" className="h-12 px-6 rounded-full font-semibold bg-blue-600 hover:bg-blue-700 text-white border-0 cursor-pointer shadow-lg shadow-blue-500/20" asChild>
-                <Link href="/contact">Let's Discuss Your Project</Link>
-              </Button>
-              <Button size="lg" className="h-12 px-6 rounded-full font-semibold bg-white/10 hover:bg-white/15 text-white border-white/10 backdrop-blur-md cursor-pointer" variant="outline" asChild>
-                <Link href="/contact">Get a Free Consultation</Link>
-              </Button>
+              <Link
+                href="/contact"
+                className={cn(
+                  buttonVariants({ size: "lg", variant: "default" }),
+                  "h-12 px-6 rounded-full font-semibold bg-blue-600 hover:bg-blue-700 text-white border-0 cursor-pointer shadow-lg shadow-blue-500/20 flex items-center justify-center"
+                )}
+              >
+                Let's Discuss Your Project
+              </Link>
+              <Link
+                href="/contact"
+                className={cn(
+                  buttonVariants({ size: "lg", variant: "outline" }),
+                  "h-12 px-6 rounded-full font-semibold bg-white/10 hover:bg-white/15 text-white border-white/10 backdrop-blur-md cursor-pointer flex items-center justify-center"
+                )}
+              >
+                Get a Free Consultation
+              </Link>
             </div>
           </div>
         </Container>

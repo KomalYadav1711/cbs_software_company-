@@ -44,7 +44,7 @@ import {
   HeartPulse
 } from "lucide-react";
 
-// 1. Client logos
+
 const CLIENT_LOGOS = [
   { name: "ApexCorp", industry: "SaaS" },
   { name: "NovaTech", industry: "AI Labs" },
@@ -54,7 +54,7 @@ const CLIENT_LOGOS = [
   { name: "Solis Agency", industry: "eCommerce" }
 ];
 
-// 2. Why professional design matters
+
 const STATS = [
   {
     percentage: "94%",
@@ -82,7 +82,7 @@ const STATS = [
   }
 ];
 
-// 3. Our Website Design Services (6 service cards)
+
 const SERVICES_CARDS = [
   {
     title: "Website Design",
@@ -122,7 +122,7 @@ const SERVICES_CARDS = [
   }
 ];
 
-// 4. Why Choose CBS SOFTWARE (icon grid)
+
 const WHY_CHOOSE_ITEMS = [
   {
     title: "Business-Driven Solutions",
@@ -156,7 +156,7 @@ const WHY_CHOOSE_ITEMS = [
   }
 ];
 
-// 5. Our Design Process (6-step timeline)
+
 const TIMELINE_STEPS = [
   {
     step: "01",
@@ -190,7 +190,7 @@ const TIMELINE_STEPS = [
   }
 ];
 
-// 6. Technologies We Work With
+
 const TECH_CATEGORIES = {
   Frontend: ["HTML5", "CSS3", "JavaScript", "Bootstrap", "React.js", "Angular", "Vue.js", "Next.js", "Tailwind CSS"],
   Backend: ["ASP.NET", "PHP", "Laravel", "Node.js", "Python", "Java", "Go", "Ruby on Rails"],
@@ -200,7 +200,7 @@ const TECH_CATEGORIES = {
   "Cloud & DevOps": ["AWS", "Microsoft Azure", "Google Cloud Platform", "Docker", "Git", "GitHub", "CI/CD", "Kubernetes"]
 };
 
-// 7. Industries We Serve
+
 const INDUSTRIES = [
   { name: "Healthcare", icon: HeartPulse },
   { name: "Education", icon: BookOpen },
@@ -216,7 +216,7 @@ const INDUSTRIES = [
   { name: "Startups & Scaleups", icon: Rocket }
 ];
 
-// 8. Portfolio Showcase
+
 const PORTFOLIO_PROJECTS = [
   {
     title: "Apex SaaS Platform",
@@ -241,7 +241,7 @@ const PORTFOLIO_PROJECTS = [
   }
 ];
 
-// 9. Testimonials
+
 const TESTIMONIALS = [
   {
     text: "Partnering with CBS Software transformed our digital strategy. Their team took the time to understand our exact business goals, delivering a custom eCommerce platform that increased our sales conversion rate by 34% within the first three months.",
@@ -263,7 +263,7 @@ const TESTIMONIALS = [
   }
 ];
 
-// 10. FAQs
+
 const FAQS = [
   {
     question: "How long does it take to design and develop a website?",

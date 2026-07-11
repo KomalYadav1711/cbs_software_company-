@@ -27,7 +27,7 @@ interface MobileNavProps {
   close: () => void;
 }
 
-// Framer motion variants for staggered animations
+
 const containerVariants = {
   open: {
     transition: {
@@ -108,7 +108,7 @@ export function MobileNav({
               </Button>
             </div>
 
-            {/* Navigation links container with staggered animations */}
+            
             <motion.div
               variants={containerVariants}
               initial="closed"
@@ -187,4 +187,4 @@ export function MobileNav({
       )}
     </AnimatePresence>
   );
-}
+}

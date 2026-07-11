@@ -350,7 +350,7 @@ export default function HomePage() {
                 transition={{ duration: 0.6, delay: 0.3 }}
                 className="mt-4 text-sm text-slate-500 leading-relaxed max-w-2xl"
               >
-                At CBS SOFTWARE, we combine creativity, technology, and strategy to build digital solutions
+                At CBS SOFTWARE, we combine creativity, technology, and strategy to build digital solutions,
                 that accelerate business growth. From responsive website design and custom software development
                 to mobile applications, we help businesses turn ideas into measurable success.
               </motion.p>

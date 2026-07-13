@@ -535,9 +535,9 @@ export default function HomePage() {
               return (
                 <motion.div
                   key={card.title}
-                  whileHover={{ y: -6, shadow: "0 20px 25px -5px rgb(0 0 0 / 0.05)" }}
+                  whileHover={{ y: -6 }}
                   transition={{ duration: 0.3 }}
-                  className="group rounded-2xl border border-slate-100 p-8 hover:border-blue-500/20 bg-slate-50/20 hover:bg-white transition-all shadow-sm flex flex-col justify-between"
+                  className="group rounded-2xl border border-slate-100 p-8 hover:border-blue-500/20 bg-slate-50/20 hover:bg-white transition-all shadow-sm hover:shadow-lg flex flex-col justify-between"
                 >
                   <div>
                     <div className="h-12 w-12 rounded-xl bg-blue-50 text-blue-600 transition-colors group-hover:bg-blue-600 group-hover:text-white flex items-center justify-center">

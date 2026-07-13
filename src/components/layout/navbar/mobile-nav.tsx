@@ -41,7 +41,7 @@ const containerVariants = {
       staggerDirection: -1,
     },
   },
-};
+} as const;
 
 const itemVariants = {
   open: {
@@ -57,7 +57,7 @@ const itemVariants = {
     opacity: 0,
     x: 24,
   },
-};
+} as const;
 
 export function MobileNav({
   open,

@@ -5,6 +5,7 @@ import Link from "next/link";
 import { motion, AnimatePresence } from "framer-motion";
 import { Container } from "@/components/common/container";
 import { Button, buttonVariants } from "@/components/ui/button";
+import { ScrollReveal } from "@/components/common/scroll-reveal";
 import { cn } from "@/lib/utils";
 import {
   ArrowRight,
@@ -473,41 +474,45 @@ export default function HomePage() {
       {/* 3. Why Professional Website Design Matters */}
       <section className="py-20 bg-slate-50/50">
         <Container>
-          <div className="text-center max-w-3xl mx-auto">
-            <h2 className="font-heading text-3xl md:text-4xl font-extrabold text-slate-900 tracking-tight">
-              Why Professional Website Design Matters
-            </h2>
-            <p className="mt-4 text-slate-600 text-base md:text-lg leading-relaxed">
-              In today's digital-first world, your website is more than just an online brochure. It is your
-              most valuable marketing and sales asset. A professional website builds immediate authority and accelerates growth.
-            </p>
-          </div>
+          <ScrollReveal>
+            <div className="text-center max-w-3xl mx-auto">
+              <h2 className="font-heading text-3xl md:text-4xl font-extrabold text-slate-900 tracking-tight">
+                Why Professional Website Design Matters
+              </h2>
+              <p className="mt-4 text-slate-600 text-base md:text-lg leading-relaxed">
+                In today's digital-first world, your website is more than just an online brochure. It is your
+                most valuable marketing and sales asset. A professional website builds immediate authority and accelerates growth.
+              </p>
+            </div>
+          </ScrollReveal>
 
           <div className="mt-16 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
             {STATS.map((stat, idx) => {
               const Icon = stat.icon;
               return (
-                <motion.div
-                  key={stat.title}
-                  whileHover={{ y: -5 }}
-                  transition={{ duration: 0.3 }}
-                  className="bg-white rounded-2xl p-6 border border-slate-100 shadow-md shadow-slate-100/50 flex flex-col justify-between"
-                >
-                  <div>
-                    <div className="h-12 w-12 rounded-xl bg-blue-50 text-blue-600 flex items-center justify-center mb-6">
-                      <Icon className="h-6 w-6" />
+                <ScrollReveal key={stat.title} delay={idx * 0.1} duration={0.5}>
+                  <motion.div
+                    whileHover={{ y: -6, scale: 1.02 }}
+                    whileTap={{ scale: 0.98 }}
+                    transition={{ type: "spring", stiffness: 400, damping: 20 }}
+                    className="bg-white rounded-2xl p-6 border border-slate-100 shadow-md shadow-slate-100/50 flex flex-col justify-between h-full hover:shadow-lg hover:border-blue-500/20 transition-all duration-300"
+                  >
+                    <div>
+                      <div className="h-12 w-12 rounded-xl bg-blue-50 text-blue-600 flex items-center justify-center mb-6">
+                        <Icon className="h-6 w-6" />
+                      </div>
+                      <div className="font-heading text-4xl font-black text-blue-600 tracking-tight">
+                        {stat.percentage}
+                      </div>
+                      <h3 className="font-heading text-base font-bold text-slate-800 mt-4 leading-snug">
+                        {stat.title}
+                      </h3>
+                      <p className="text-slate-500 text-sm mt-3 leading-relaxed">
+                        {stat.description}
+                      </p>
                     </div>
-                    <div className="font-heading text-4xl font-black text-blue-600 tracking-tight">
-                      {stat.percentage}
-                    </div>
-                    <h3 className="font-heading text-base font-bold text-slate-800 mt-4 leading-snug">
-                      {stat.title}
-                    </h3>
-                    <p className="text-slate-500 text-sm mt-3 leading-relaxed">
-                      {stat.description}
-                    </p>
-                  </div>
-                </motion.div>
+                  </motion.div>
+                </ScrollReveal>
               );
             })}
           </div>
@@ -517,51 +522,55 @@ export default function HomePage() {
       {/* 4. Our Website Design Services (6 service cards) */}
       <section className="py-20 bg-white">
         <Container>
-          <div className="text-center max-w-3xl mx-auto">
-            <span className="text-xs font-bold uppercase tracking-wider text-blue-600 bg-blue-50 px-3 py-1 rounded-full">
-              Core Expertise
-            </span>
-            <h2 className="font-heading text-3xl md:text-4xl font-extrabold text-slate-900 mt-6 tracking-tight">
-              Comprehensive IT Solutions Under One Roof
-            </h2>
-            <p className="mt-4 text-slate-600 text-base md:text-lg">
-              We design and build bespoke platforms that solve real-world challenges, optimize efficiency, and turn business ideas into measurable success.
-            </p>
-          </div>
+          <ScrollReveal>
+            <div className="text-center max-w-3xl mx-auto">
+              <span className="text-xs font-bold uppercase tracking-wider text-blue-600 bg-blue-50 px-3 py-1 rounded-full">
+                Core Expertise
+              </span>
+              <h2 className="font-heading text-3xl md:text-4xl font-extrabold text-slate-900 mt-6 tracking-tight">
+                Comprehensive IT Solutions Under One Roof
+              </h2>
+              <p className="mt-4 text-slate-600 text-base md:text-lg">
+                We design and build bespoke platforms that solve real-world challenges, optimize efficiency, and turn business ideas into measurable success.
+              </p>
+            </div>
+          </ScrollReveal>
 
           <div className="mt-16 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {SERVICES_CARDS.map((card) => {
+            {SERVICES_CARDS.map((card, idx) => {
               const Icon = card.icon;
               return (
-                <motion.div
-                  key={card.title}
-                  whileHover={{ y: -6 }}
-                  transition={{ duration: 0.3 }}
-                  className="group rounded-2xl border border-slate-100 p-8 hover:border-blue-500/20 bg-slate-50/20 hover:bg-white transition-all shadow-sm hover:shadow-lg flex flex-col justify-between"
-                >
-                  <div>
-                    <div className="h-12 w-12 rounded-xl bg-blue-50 text-blue-600 transition-colors group-hover:bg-blue-600 group-hover:text-white flex items-center justify-center">
-                      <Icon className="h-6 w-6" />
+                <ScrollReveal key={card.title} delay={idx * 0.08} duration={0.5}>
+                  <motion.div
+                    whileHover={{ y: -6, scale: 1.02 }}
+                    whileTap={{ scale: 0.98 }}
+                    transition={{ type: "spring", stiffness: 400, damping: 20 }}
+                    className="group rounded-2xl border border-slate-100 p-8 hover:border-blue-500/20 bg-slate-50/20 hover:bg-white transition-all shadow-sm hover:shadow-lg flex flex-col justify-between h-full"
+                  >
+                    <div>
+                      <div className="h-12 w-12 rounded-xl bg-blue-50 text-blue-600 transition-colors group-hover:bg-blue-600 group-hover:text-white flex items-center justify-center">
+                        <Icon className="h-6 w-6" />
+                      </div>
+                      <h3 className="font-heading text-xl font-bold text-slate-900 mt-6 transition-colors group-hover:text-blue-600">
+                        {card.title}
+                      </h3>
+                      <p className="text-slate-500 text-sm mt-3.5 leading-relaxed">
+                        {card.description}
+                      </p>
                     </div>
-                    <h3 className="font-heading text-xl font-bold text-slate-900 mt-6 transition-colors group-hover:text-blue-600">
-                      {card.title}
-                    </h3>
-                    <p className="text-slate-500 text-sm mt-3.5 leading-relaxed">
-                      {card.description}
-                    </p>
-                  </div>
 
-                  <div className="mt-8 border-t border-slate-100 pt-6">
-                    <ul className="grid grid-cols-1 gap-2.5">
-                      {card.details.map((detail) => (
-                        <li key={detail} className="flex items-center gap-2 text-xs text-slate-600">
-                          <Check className="h-3.5 w-3.5 text-blue-500 shrink-0" />
-                          <span>{detail}</span>
-                        </li>
-                      ))}
-                    </ul>
-                  </div>
-                </motion.div>
+                    <div className="mt-8 border-t border-slate-100 pt-6">
+                      <ul className="grid grid-cols-1 gap-2.5">
+                        {card.details.map((detail) => (
+                          <li key={detail} className="flex items-center gap-2 text-xs text-slate-600">
+                            <Check className="h-3.5 w-3.5 text-blue-500 shrink-0" />
+                            <span>{detail}</span>
+                          </li>
+                        ))}
+                      </ul>
+                    </div>
+                  </motion.div>
+                </ScrollReveal>
               );
             })}
           </div>
@@ -571,36 +580,44 @@ export default function HomePage() {
       {/* 5. Why Choose CBS SOFTWARE (icon grid) */}
       <section className="py-20 bg-slate-50/50">
         <Container>
-          <div className="text-center max-w-3xl mx-auto">
-            <span className="text-xs font-bold uppercase tracking-wider text-blue-600 bg-blue-50 px-3 py-1 rounded-full">
-              Our Value Proposition
-            </span>
-            <h2 className="font-heading text-3xl md:text-4xl font-extrabold text-slate-900 mt-6 tracking-tight">
-              More Than a Technology Company — We're Your Digital Growth Partner
-            </h2>
-            <p className="mt-4 text-slate-600 text-base md:text-lg">
-              Choosing the right technology partner can make all the difference. At CBS SOFTWARE, we don't
-              just build websites or applications—we create custom digital experiences that help businesses scale.
-            </p>
-          </div>
+          <ScrollReveal>
+            <div className="text-center max-w-3xl mx-auto">
+              <span className="text-xs font-bold uppercase tracking-wider text-blue-600 bg-blue-50 px-3 py-1 rounded-full">
+                Our Value Proposition
+              </span>
+              <h2 className="font-heading text-3xl md:text-4xl font-extrabold text-slate-900 mt-6 tracking-tight">
+                More Than a Technology Company — We're Your Digital Growth Partner
+              </h2>
+              <p className="mt-4 text-slate-600 text-base md:text-lg">
+                Choosing the right technology partner can make all the difference. At CBS SOFTWARE, we don't
+                just build websites or applications—we create custom digital experiences that help businesses scale.
+              </p>
+            </div>
+          </ScrollReveal>
 
           <div className="mt-16 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
             {WHY_CHOOSE_ITEMS.map((item, idx) => {
               const Icon = item.icon;
               return (
-                <div key={item.title} className="flex gap-4 p-6 bg-white rounded-2xl border border-slate-100 shadow-sm">
-                  <div className="h-10 w-10 shrink-0 rounded-lg bg-blue-50 text-blue-600 flex items-center justify-center">
-                    <Icon className="h-5 w-5" />
-                  </div>
-                  <div>
-                    <h3 className="font-heading text-base font-bold text-slate-900 leading-snug">
-                      {item.title}
-                    </h3>
-                    <p className="text-slate-500 text-sm mt-2.5 leading-relaxed">
-                      {item.description}
-                    </p>
-                  </div>
-                </div>
+                <ScrollReveal key={item.title} delay={idx * 0.06} duration={0.5}>
+                  <motion.div
+                    whileHover={{ y: -4, scale: 1.01 }}
+                    transition={{ type: "spring", stiffness: 400, damping: 25 }}
+                    className="flex gap-4 p-6 bg-white rounded-2xl border border-slate-100 shadow-sm hover:shadow-md hover:border-blue-500/10 transition-all duration-300 h-full"
+                  >
+                    <div className="h-10 w-10 shrink-0 rounded-lg bg-blue-50 text-blue-600 flex items-center justify-center">
+                      <Icon className="h-5 w-5" />
+                    </div>
+                    <div>
+                      <h3 className="font-heading text-base font-bold text-slate-900 leading-snug">
+                        {item.title}
+                      </h3>
+                      <p className="text-slate-500 text-sm mt-2.5 leading-relaxed">
+                        {item.description}
+                      </p>
+                    </div>
+                  </motion.div>
+                </ScrollReveal>
               );
             })}
           </div>
@@ -610,38 +627,46 @@ export default function HomePage() {
       {/* 6. Our Design Process (6-step timeline) */}
       <section className="py-20 bg-white">
         <Container>
-          <div className="text-center max-w-3xl mx-auto">
-            <span className="text-xs font-bold uppercase tracking-wider text-blue-600 bg-blue-50 px-3 py-1 rounded-full">
-              Methodology
-            </span>
-            <h2 className="font-heading text-3xl md:text-4xl font-extrabold text-slate-900 mt-6 tracking-tight">
-              A Proven Process That Delivers Exceptional Results
-            </h2>
-            <p className="mt-4 text-slate-600 text-base md:text-lg">
-              We employ a collaborative, agile workflow to ensure transparency, milestone accuracy, and high quality at every phase of the project.
-            </p>
-          </div>
+          <ScrollReveal>
+            <div className="text-center max-w-3xl mx-auto">
+              <span className="text-xs font-bold uppercase tracking-wider text-blue-600 bg-blue-50 px-3 py-1 rounded-full">
+                Methodology
+              </span>
+              <h2 className="font-heading text-3xl md:text-4xl font-extrabold text-slate-900 mt-6 tracking-tight">
+                A Proven Process That Delivers Exceptional Results
+              </h2>
+              <p className="mt-4 text-slate-600 text-base md:text-lg">
+                We employ a collaborative, agile workflow to ensure transparency, milestone accuracy, and high quality at every phase of the project.
+              </p>
+            </div>
+          </ScrollReveal>
 
           <div className="mt-16 relative">
             {/* Horizontal progress bar for desktop */}
-            <div className="hidden lg:block absolute top-[44px] left-[10%] right-[10%] h-[2px] bg-slate-100 -z-10" />
+            <div className="hidden lg:block absolute top-[44px] left-[10%] right-[10%] h-[2px] bg-slate-100/70 -z-10" />
 
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-6 gap-8">
               {TIMELINE_STEPS.map((step, idx) => (
-                <div key={step.step} className="flex flex-col items-center lg:items-start text-center lg:text-left">
-                  {/* Step Bubble */}
-                  <div className="h-22 w-22 rounded-full border-2 border-slate-100 bg-white shadow-sm flex items-center justify-center mb-6 group-hover:border-blue-600 transition-colors">
-                    <span className="font-heading text-2xl font-black text-blue-600 bg-gradient-to-r from-blue-600 to-indigo-600 bg-clip-text text-transparent">
-                      {step.step}
-                    </span>
+                <ScrollReveal key={step.step} delay={idx * 0.08} duration={0.5}>
+                  <div className="flex flex-col items-center lg:items-start text-center lg:text-left group/step">
+                    {/* Step Bubble */}
+                    <motion.div
+                      whileHover={{ scale: 1.1, rotate: 5 }}
+                      transition={{ type: "spring", stiffness: 300, damping: 15 }}
+                      className="h-22 w-22 rounded-full border-2 border-slate-100 bg-white shadow-sm flex items-center justify-center mb-6 group-hover/step:border-blue-600 group-hover/step:shadow-md transition-all duration-300 cursor-default"
+                    >
+                      <span className="font-heading text-2xl font-black text-blue-600 bg-gradient-to-r from-blue-600 to-indigo-600 bg-clip-text text-transparent">
+                        {step.step}
+                      </span>
+                    </motion.div>
+                    <h3 className="font-heading text-base font-bold text-slate-900 leading-tight group-hover/step:text-blue-600 transition-colors">
+                      {step.title}
+                    </h3>
+                    <p className="text-slate-500 text-xs mt-3 leading-relaxed">
+                      {step.description}
+                    </p>
                   </div>
-                  <h3 className="font-heading text-base font-bold text-slate-900 leading-tight">
-                    {step.title}
-                  </h3>
-                  <p className="text-slate-500 text-xs mt-3 leading-relaxed">
-                    {step.description}
-                  </p>
-                </div>
+                </ScrollReveal>
               ))}
             </div>
           </div>
@@ -651,31 +676,40 @@ export default function HomePage() {
       {/* 7. Technologies We Work With */}
       <section className="py-20 bg-slate-50/50">
         <Container>
-          <div className="text-center max-w-3xl mx-auto">
-            <span className="text-xs font-bold uppercase tracking-wider text-blue-600 bg-blue-50 px-3 py-1 rounded-full">
-              Tech Stack
-            </span>
-            <h2 className="font-heading text-3xl md:text-4xl font-extrabold text-slate-900 mt-6 tracking-tight">
-              Building with Industry-Leading Technologies
-            </h2>
-            <p className="mt-4 text-slate-600 text-base md:text-lg">
-              We leverage modern tools, high-performance database engines, secure payment pathways, and robust cloud hosting architectures.
-            </p>
-          </div>
+          <ScrollReveal>
+            <div className="text-center max-w-3xl mx-auto">
+              <span className="text-xs font-bold uppercase tracking-wider text-blue-600 bg-blue-50 px-3 py-1 rounded-full">
+                Tech Stack
+              </span>
+              <h2 className="font-heading text-3xl md:text-4xl font-extrabold text-slate-900 mt-6 tracking-tight">
+                Building with Industry-Leading Technologies
+              </h2>
+              <p className="mt-4 text-slate-600 text-base md:text-lg">
+                We leverage modern tools, high-performance database engines, secure payment pathways, and robust cloud hosting architectures.
+              </p>
+            </div>
+          </ScrollReveal>
 
           {/* Switch Tabs */}
-          <div className="mt-12 flex flex-wrap justify-center gap-2 max-w-4xl mx-auto bg-slate-100 p-1.5 rounded-full">
+          <div className="mt-12 flex flex-wrap justify-center gap-2 max-w-4xl mx-auto bg-slate-100 p-1.5 rounded-full relative">
             {Object.keys(TECH_CATEGORIES).map((catName) => (
               <button
                 key={catName}
                 onClick={() => setActiveTechCategory(catName as keyof typeof TECH_CATEGORIES)}
-                className={`px-5 py-2.5 rounded-full text-xs font-bold transition-all cursor-pointer ${
+                className={`relative px-5 py-2.5 rounded-full text-xs font-bold transition-colors cursor-pointer z-10 ${
                   activeTechCategory === catName
-                    ? "bg-white text-blue-600 shadow-sm"
+                    ? "text-blue-600"
                     : "text-slate-500 hover:text-slate-800"
                 }`}
               >
                 {catName}
+                {activeTechCategory === catName && (
+                  <motion.div
+                    layoutId="active-tech-tab"
+                    className="absolute inset-0 rounded-full bg-white shadow-sm -z-10"
+                    transition={{ type: "spring", stiffness: 380, damping: 30 }}
+                  />
+                )}
               </button>
             ))}
           </div>
@@ -708,33 +742,39 @@ export default function HomePage() {
       {/* 8. Industries We Serve */}
       <section className="py-20 bg-white">
         <Container>
-          <div className="text-center max-w-3xl mx-auto">
-            <span className="text-xs font-bold uppercase tracking-wider text-blue-600 bg-blue-50 px-3 py-1 rounded-full">
-              Our Verticals
-            </span>
-            <h2 className="font-heading text-3xl md:text-4xl font-extrabold text-slate-900 mt-6 tracking-tight">
-              Empowering Businesses Across Diverse Industries
-            </h2>
-            <p className="mt-4 text-slate-600 text-base md:text-lg">
-              Our technology solutions are trusted by organizations across various sectors, helping them innovate, optimize operations, and achieve sustainable growth.
-            </p>
-          </div>
+          <ScrollReveal>
+            <div className="text-center max-w-3xl mx-auto">
+              <span className="text-xs font-bold uppercase tracking-wider text-blue-600 bg-blue-50 px-3 py-1 rounded-full">
+                Our Verticals
+              </span>
+              <h2 className="font-heading text-3xl md:text-4xl font-extrabold text-slate-900 mt-6 tracking-tight">
+                Empowering Businesses Across Diverse Industries
+              </h2>
+              <p className="mt-4 text-slate-600 text-base md:text-lg">
+                Our technology solutions are trusted by organizations across various sectors, helping them innovate, optimize operations, and achieve sustainable growth.
+              </p>
+            </div>
+          </ScrollReveal>
 
           <div className="mt-16 grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-6">
             {INDUSTRIES.map((ind, idx) => {
               const Icon = ind.icon;
               return (
-                <div
-                  key={ind.name}
-                  className="group flex flex-col items-center justify-center p-6 border border-slate-100 rounded-2xl hover:border-blue-500/20 hover:bg-blue-50/5 transition-all text-center cursor-default bg-slate-50/20"
-                >
-                  <div className="h-10 w-10 rounded-lg bg-blue-50 group-hover:bg-blue-600 group-hover:text-white text-blue-600 transition-colors flex items-center justify-center mb-4">
-                    <Icon className="h-5 w-5" />
-                  </div>
-                  <span className="font-heading text-xs font-bold text-slate-800 group-hover:text-blue-600 transition-colors">
-                    {ind.name}
-                  </span>
-                </div>
+                <ScrollReveal key={ind.name} delay={idx * 0.04} duration={0.4}>
+                  <motion.div
+                    whileHover={{ scale: 1.05, y: -4 }}
+                    whileTap={{ scale: 0.95 }}
+                    transition={{ type: "spring", stiffness: 450, damping: 20 }}
+                    className="group flex flex-col items-center justify-center p-6 border border-slate-100 rounded-2xl hover:border-blue-500/20 hover:bg-blue-50/5 transition-all text-center cursor-default bg-slate-50/20 hover:shadow-md h-full"
+                  >
+                    <div className="h-10 w-10 rounded-lg bg-blue-50 group-hover:bg-blue-600 group-hover:text-white text-blue-600 transition-colors flex items-center justify-center mb-4">
+                      <Icon className="h-5 w-5" />
+                    </div>
+                    <span className="font-heading text-xs font-bold text-slate-800 group-hover:text-blue-600 transition-colors">
+                      {ind.name}
+                    </span>
+                  </motion.div>
+                </ScrollReveal>
               );
             })}
           </div>
@@ -744,85 +784,89 @@ export default function HomePage() {
       {/* 9. Portfolio Showcase */}
       <section className="py-20 bg-slate-50/50">
         <Container>
-          <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 max-w-5xl mx-auto">
-            <div>
-              <span className="text-xs font-bold uppercase tracking-wider text-blue-600 bg-blue-50 px-3 py-1 rounded-full">
-                Featured Work
-              </span>
-              <h2 className="font-heading text-3xl md:text-4xl font-extrabold text-slate-900 mt-6 tracking-tight">
-                Case Studies & Work Showcase
-              </h2>
+          <ScrollReveal>
+            <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 max-w-5xl mx-auto">
+              <div>
+                <span className="text-xs font-bold uppercase tracking-wider text-blue-600 bg-blue-50 px-3 py-1 rounded-full">
+                  Featured Work
+                </span>
+                <h2 className="font-heading text-3xl md:text-4xl font-extrabold text-slate-900 mt-6 tracking-tight">
+                  Case Studies & Work Showcase
+                </h2>
+              </div>
+              <div className="flex items-center gap-2">
+                {PORTFOLIO_PROJECTS.map((_, idx) => (
+                  <button
+                    key={idx}
+                    onClick={() => setPortfolioIndex(idx)}
+                    className={`h-3 w-3 rounded-full transition-all cursor-pointer ${
+                      portfolioIndex === idx ? "bg-blue-600 w-6" : "bg-slate-300"
+                    }`}
+                    aria-label={`Show project ${idx + 1}`}
+                  />
+                ))}
+              </div>
             </div>
-            <div className="flex items-center gap-2">
-              {PORTFOLIO_PROJECTS.map((_, idx) => (
-                <button
-                  key={idx}
-                  onClick={() => setPortfolioIndex(idx)}
-                  className={`h-3 w-3 rounded-full transition-all cursor-pointer ${
-                    portfolioIndex === idx ? "bg-blue-600 w-6" : "bg-slate-300"
-                  }`}
-                  aria-label={`Show project ${idx + 1}`}
-                />
-              ))}
-            </div>
-          </div>
+          </ScrollReveal>
 
           {/* Active project card */}
           <div className="mt-12 max-w-5xl mx-auto">
-            <AnimatePresence mode="wait">
-              <motion.div
-                key={portfolioIndex}
-                initial={{ opacity: 0, x: 15 }}
-                animate={{ opacity: 1, x: 0 }}
-                exit={{ opacity: 0, x: -15 }}
-                transition={{ duration: 0.4 }}
-                className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center bg-white rounded-3xl border border-slate-100 shadow-xl shadow-slate-100/50 p-6 md:p-10"
-              >
-                {/* Visual */}
-                <div className="lg:col-span-6">
-                  <div className={`aspect-[16/10] w-full rounded-2xl bg-gradient-to-tr ${PORTFOLIO_PROJECTS[portfolioIndex].color} flex flex-col justify-center items-center text-white p-6 relative overflow-hidden shadow-inner`}>
-                    <div className="absolute top-4 left-4 text-[10px] font-bold uppercase tracking-wider bg-white/20 backdrop-blur-md px-3 py-1.5 rounded-full">
-                      {PORTFOLIO_PROJECTS[portfolioIndex].category}
-                    </div>
-                    <Laptop className="h-20 w-20 opacity-80" />
-                    <span className="font-heading font-black text-2xl tracking-tight mt-4">
-                      {PORTFOLIO_PROJECTS[portfolioIndex].title}
-                    </span>
-                  </div>
-                </div>
-
-                {/* Details */}
-                <div className="lg:col-span-6 flex flex-col items-start">
-                  <span className="text-[10px] font-bold uppercase tracking-wider text-blue-600 bg-blue-50 px-3 py-1 rounded-full mb-4">
-                    Featured Project
-                  </span>
-                  <h3 className="font-heading text-2xl font-bold text-slate-900 leading-tight">
-                    {PORTFOLIO_PROJECTS[portfolioIndex].title}
-                  </h3>
-                  <p className="text-slate-600 text-sm mt-4 leading-relaxed">
-                    {PORTFOLIO_PROJECTS[portfolioIndex].description}
-                  </p>
-                  
-                  <div className="mt-6 flex flex-wrap gap-2">
-                    {PORTFOLIO_PROJECTS[portfolioIndex].tech.map((t) => (
-                      <span key={t} className="px-2.5 py-1 bg-slate-50 border border-slate-100 text-slate-500 text-[10px] font-bold rounded-lg uppercase tracking-wide">
-                        {t}
+            <ScrollReveal direction="none" duration={0.6}>
+              <AnimatePresence mode="wait">
+                <motion.div
+                  key={portfolioIndex}
+                  initial={{ opacity: 0, x: 15 }}
+                  animate={{ opacity: 1, x: 0 }}
+                  exit={{ opacity: 0, x: -15 }}
+                  transition={{ duration: 0.4 }}
+                  className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center bg-white rounded-3xl border border-slate-100 shadow-xl shadow-slate-100/50 p-6 md:p-10"
+                >
+                  {/* Visual */}
+                  <div className="lg:col-span-6">
+                    <div className={`aspect-[16/10] w-full rounded-2xl bg-gradient-to-tr ${PORTFOLIO_PROJECTS[portfolioIndex].color} flex flex-col justify-center items-center text-white p-6 relative overflow-hidden shadow-inner`}>
+                      <div className="absolute top-4 left-4 text-[10px] font-bold uppercase tracking-wider bg-white/20 backdrop-blur-md px-3 py-1.5 rounded-full">
+                        {PORTFOLIO_PROJECTS[portfolioIndex].category}
+                      </div>
+                      <Laptop className="h-20 w-20 opacity-80" />
+                      <span className="font-heading font-black text-2xl tracking-tight mt-4">
+                        {PORTFOLIO_PROJECTS[portfolioIndex].title}
                       </span>
-                    ))}
+                    </div>
                   </div>
 
-                  <Link
-                    href="/services"
-                    className={cn(
-                      buttonVariants({ variant: "outline" }),
-                      "mt-8 rounded-full font-semibold border-slate-200 text-slate-700 hover:bg-slate-100 flex items-center justify-center"
-                    )}
-                  >
-                    Explore Services Details <ArrowRight className="h-4 w-4 ml-1" />
-                  </Link>
-                </div>
-              </motion.div>
-            </AnimatePresence>
+                  {/* Details */}
+                  <div className="lg:col-span-6 flex flex-col items-start">
+                    <span className="text-[10px] font-bold uppercase tracking-wider text-blue-600 bg-blue-50 px-3 py-1 rounded-full mb-4">
+                      Featured Project
+                    </span>
+                    <h3 className="font-heading text-2xl font-bold text-slate-900 leading-tight">
+                      {PORTFOLIO_PROJECTS[portfolioIndex].title}
+                    </h3>
+                    <p className="text-slate-600 text-sm mt-4 leading-relaxed">
+                      {PORTFOLIO_PROJECTS[portfolioIndex].description}
+                    </p>
+                    
+                    <div className="mt-6 flex flex-wrap gap-2">
+                      {PORTFOLIO_PROJECTS[portfolioIndex].tech.map((t) => (
+                        <span key={t} className="px-2.5 py-1 bg-slate-50 border border-slate-100 text-slate-500 text-[10px] font-bold rounded-lg uppercase tracking-wide">
+                          {t}
+                        </span>
+                      ))}
+                    </div>
+
+                    <Link
+                      href="/services"
+                      className={cn(
+                        buttonVariants({ variant: "outline" }),
+                        "mt-8 rounded-full font-semibold border-slate-200 text-slate-700 hover:bg-slate-100 flex items-center justify-center"
+                      )}
+                    >
+                      Explore Services Details <ArrowRight className="h-4 w-4 ml-1" />
+                    </Link>
+                  </div>
+                </motion.div>
+              </AnimatePresence>
+            </ScrollReveal>
           </div>
         </Container>
       </section>
@@ -830,120 +874,128 @@ export default function HomePage() {
       {/* 10. Testimonials */}
       <section className="py-20 bg-white">
         <Container>
-          <div className="text-center max-w-3xl mx-auto">
-            <span className="text-xs font-bold uppercase tracking-wider text-blue-600 bg-blue-50 px-3 py-1 rounded-full">
-              Success Stories
-            </span>
-            <h2 className="font-heading text-3xl md:text-4xl font-extrabold text-slate-900 mt-6 tracking-tight">
-              What Our Clients Say About Us
-            </h2>
-          </div>
-
-          <div className="mt-16 max-w-4xl mx-auto bg-slate-50/50 border border-slate-100 rounded-3xl p-8 md:p-12 shadow-sm relative">
-            <div className="absolute top-8 left-8 text-slate-200 font-serif text-8xl pointer-events-none select-none leading-none">“</div>
-            
-            <AnimatePresence mode="wait">
-              <motion.div
-                key={testimonialIndex}
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 1 }}
-                exit={{ opacity: 0 }}
-                transition={{ duration: 0.3 }}
-                className="relative z-10 flex flex-col items-center text-center"
-              >
-                {/* Rating stars */}
-                <div className="flex items-center gap-1 text-amber-500 justify-center">
-                  {[...Array(TESTIMONIALS[testimonialIndex].rating)].map((_, i) => (
-                    <Star key={i} className="fill-current h-4.5 w-4.5" />
-                  ))}
-                </div>
-
-                <p className="mt-8 text-base md:text-lg text-slate-700 leading-relaxed font-medium italic">
-                  "{TESTIMONIALS[testimonialIndex].text}"
-                </p>
-
-                <div className="mt-8 flex flex-col items-center">
-                  <div className="h-12 w-12 rounded-full bg-blue-100 flex items-center justify-center font-heading text-sm font-extrabold text-blue-600">
-                    {TESTIMONIALS[testimonialIndex].author.substring(0,2).toUpperCase()}
-                  </div>
-                  <div className="font-heading text-base font-bold text-slate-900 mt-4 leading-tight">
-                    {TESTIMONIALS[testimonialIndex].author}
-                  </div>
-                  <div className="text-xs text-slate-500 mt-1">
-                    {TESTIMONIALS[testimonialIndex].role}
-                  </div>
-                </div>
-              </motion.div>
-            </AnimatePresence>
-
-            {/* Carousel navigation controls */}
-            <div className="mt-10 flex justify-center gap-3">
-              {TESTIMONIALS.map((_, idx) => (
-                <button
-                  key={idx}
-                  onClick={() => setTestimonialIndex(idx)}
-                  className={`h-2 w-2 rounded-full cursor-pointer transition-all ${
-                    testimonialIndex === idx ? "bg-blue-600 w-5" : "bg-slate-300"
-                  }`}
-                  aria-label={`Show testimonial ${idx + 1}`}
-                />
-              ))}
+          <ScrollReveal>
+            <div className="text-center max-w-3xl mx-auto">
+              <span className="text-xs font-bold uppercase tracking-wider text-blue-600 bg-blue-50 px-3 py-1 rounded-full">
+                Success Stories
+              </span>
+              <h2 className="font-heading text-3xl md:text-4xl font-extrabold text-slate-900 mt-6 tracking-tight">
+                What Our Clients Say About Us
+              </h2>
             </div>
-          </div>
+          </ScrollReveal>
+
+          <ScrollReveal delay={0.1} duration={0.6}>
+            <div className="mt-16 max-w-4xl mx-auto bg-slate-50/50 border border-slate-100 rounded-3xl p-8 md:p-12 shadow-sm relative">
+              <div className="absolute top-8 left-8 text-slate-200 font-serif text-8xl pointer-events-none select-none leading-none">“</div>
+              
+              <AnimatePresence mode="wait">
+                <motion.div
+                  key={testimonialIndex}
+                  initial={{ opacity: 0 }}
+                  animate={{ opacity: 1 }}
+                  exit={{ opacity: 0 }}
+                  transition={{ duration: 0.3 }}
+                  className="relative z-10 flex flex-col items-center text-center"
+                >
+                  {/* Rating stars */}
+                  <div className="flex items-center gap-1 text-amber-500 justify-center">
+                    {[...Array(TESTIMONIALS[testimonialIndex].rating)].map((_, i) => (
+                      <Star key={i} className="fill-current h-4.5 w-4.5" />
+                    ))}
+                  </div>
+
+                  <p className="mt-8 text-base md:text-lg text-slate-700 leading-relaxed font-medium italic">
+                    "{TESTIMONIALS[testimonialIndex].text}"
+                  </p>
+
+                  <div className="mt-8 flex flex-col items-center">
+                    <div className="h-12 w-12 rounded-full bg-blue-100 flex items-center justify-center font-heading text-sm font-extrabold text-blue-600">
+                      {TESTIMONIALS[testimonialIndex].author.substring(0,2).toUpperCase()}
+                    </div>
+                    <div className="font-heading text-base font-bold text-slate-900 mt-4 leading-tight">
+                      {TESTIMONIALS[testimonialIndex].author}
+                    </div>
+                    <div className="text-xs text-slate-500 mt-1">
+                      {TESTIMONIALS[testimonialIndex].role}
+                    </div>
+                  </div>
+                </motion.div>
+              </AnimatePresence>
+
+              {/* Carousel navigation controls */}
+              <div className="mt-10 flex justify-center gap-3">
+                {TESTIMONIALS.map((_, idx) => (
+                  <button
+                    key={idx}
+                    onClick={() => setTestimonialIndex(idx)}
+                    className={`h-2 w-2 rounded-full cursor-pointer transition-all ${
+                      testimonialIndex === idx ? "bg-blue-600 w-5" : "bg-slate-300"
+                    }`}
+                    aria-label={`Show testimonial ${idx + 1}`}
+                  />
+                ))}
+              </div>
+            </div>
+          </ScrollReveal>
         </Container>
       </section>
 
       {/* 11. FAQs */}
       <section className="py-20 bg-slate-50/50">
         <Container>
-          <div className="text-center max-w-3xl mx-auto">
-            <span className="text-xs font-bold uppercase tracking-wider text-blue-600 bg-blue-50 px-3 py-1 rounded-full">
-              Got Questions?
-            </span>
-            <h2 className="font-heading text-3xl md:text-4xl font-extrabold text-slate-900 mt-6 tracking-tight">
-              Frequently Asked Questions
-            </h2>
-            <p className="mt-4 text-slate-600 text-base md:text-lg">
-              Here are the most common inquiries we receive regarding our design processes, timelines, and deployment capabilities.
-            </p>
-          </div>
+          <ScrollReveal>
+            <div className="text-center max-w-3xl mx-auto">
+              <span className="text-xs font-bold uppercase tracking-wider text-blue-600 bg-blue-50 px-3 py-1 rounded-full">
+                Got Questions?
+              </span>
+              <h2 className="font-heading text-3xl md:text-4xl font-extrabold text-slate-900 mt-6 tracking-tight">
+                Frequently Asked Questions
+              </h2>
+              <p className="mt-4 text-slate-600 text-base md:text-lg">
+                Here are the most common inquiries we receive regarding our design processes, timelines, and deployment capabilities.
+              </p>
+            </div>
+          </ScrollReveal>
 
-          <div className="mt-16 max-w-3xl mx-auto flex flex-col gap-4">
-            {FAQS.map((faq, idx) => (
-              <div
-                key={idx}
-                className="bg-white rounded-2xl border border-slate-100 shadow-sm overflow-hidden"
-              >
-                <button
-                  onClick={() => setOpenFAQ(openFAQ === idx ? null : idx)}
-                  className="w-full flex items-center justify-between p-6 text-left font-heading font-bold text-slate-900 text-sm md:text-base cursor-pointer select-none"
+          <ScrollReveal delay={0.1} duration={0.6}>
+            <div className="mt-16 max-w-3xl mx-auto flex flex-col gap-4">
+              {FAQS.map((faq, idx) => (
+                <div
+                  key={idx}
+                  className="bg-white rounded-2xl border border-slate-100 shadow-sm overflow-hidden"
                 >
-                  <span>{faq.question}</span>
-                  <ChevronDown
-                    className={`h-5 w-5 text-slate-400 shrink-0 transition-transform duration-300 ${
-                      openFAQ === idx ? "rotate-180 text-blue-500" : ""
-                    }`}
-                  />
-                </button>
-                
-                <AnimatePresence initial={false}>
-                  {openFAQ === idx && (
-                    <motion.div
-                      initial={{ height: 0 }}
-                      animate={{ height: "auto" }}
-                      exit={{ height: 0 }}
-                      transition={{ duration: 0.25 }}
-                      className="overflow-hidden"
-                    >
-                      <div className="px-6 pb-6 text-slate-600 text-sm leading-relaxed border-t border-slate-50 pt-4">
-                        {faq.answer}
-                      </div>
-                    </motion.div>
-                  )}
-                </AnimatePresence>
-              </div>
-            ))}
-          </div>
+                  <button
+                    onClick={() => setOpenFAQ(openFAQ === idx ? null : idx)}
+                    className="w-full flex items-center justify-between p-6 text-left font-heading font-bold text-slate-900 text-sm md:text-base cursor-pointer select-none"
+                  >
+                    <span>{faq.question}</span>
+                    <ChevronDown
+                      className={`h-5 w-5 text-slate-400 shrink-0 transition-transform duration-300 ${
+                        openFAQ === idx ? "rotate-180 text-blue-500" : ""
+                      }`}
+                    />
+                  </button>
+                  
+                  <AnimatePresence initial={false}>
+                    {openFAQ === idx && (
+                      <motion.div
+                        initial={{ height: 0 }}
+                        animate={{ height: "auto" }}
+                        exit={{ height: 0 }}
+                        transition={{ duration: 0.25 }}
+                        className="overflow-hidden"
+                      >
+                        <div className="px-6 pb-6 text-slate-600 text-sm leading-relaxed border-t border-slate-50 pt-4">
+                          {faq.answer}
+                        </div>
+                      </motion.div>
+                    )}
+                  </AnimatePresence>
+                </div>
+              ))}
+            </div>
+          </ScrollReveal>
         </Container>
       </section>
 
@@ -956,39 +1008,41 @@ export default function HomePage() {
         </div>
 
         <Container>
-          <div className="max-w-4xl mx-auto text-center flex flex-col items-center">
-            <span className="text-[10px] font-bold uppercase tracking-widest text-blue-400 bg-blue-900/40 border border-blue-800/40 px-3.5 py-1.5 rounded-full mb-6">
-              LET'S CREATE SOMETHING REMARKABLE
-            </span>
-            <h2 className="font-heading text-3xl sm:text-4xl md:text-5xl font-extrabold tracking-tight leading-tight">
-              Ready to Build Something Exceptional?
-            </h2>
-            <p className="mt-6 text-slate-300 text-sm sm:text-base leading-relaxed max-w-2xl">
-              Let's transform your ideas into innovative, fast, and high-converting digital solutions that
-              accelerate your business growth. Your success starts with the right technology partner.
-            </p>
+          <ScrollReveal direction="up" duration={0.6}>
+            <div className="max-w-4xl mx-auto text-center flex flex-col items-center">
+              <span className="text-[10px] font-bold uppercase tracking-widest text-blue-400 bg-blue-900/40 border border-blue-800/40 px-3.5 py-1.5 rounded-full mb-6">
+                LET'S CREATE SOMETHING REMARKABLE
+              </span>
+              <h2 className="font-heading text-3xl sm:text-4xl md:text-5xl font-extrabold tracking-tight leading-tight">
+                Ready to Build Something Exceptional?
+              </h2>
+              <p className="mt-6 text-slate-300 text-sm sm:text-base leading-relaxed max-w-2xl">
+                Let's transform your ideas into innovative, fast, and high-converting digital solutions that
+                accelerate your business growth. Your success starts with the right technology partner.
+              </p>
 
-            <div className="mt-10 flex flex-wrap justify-center gap-4">
-              <Link
-                href="/contact"
-                className={cn(
-                  buttonVariants({ size: "lg", variant: "default" }),
-                  "h-12 px-6 rounded-full font-semibold bg-blue-600 hover:bg-blue-700 text-white border-0 shadow-lg shadow-blue-500/25 cursor-pointer flex items-center justify-center"
-                )}
-              >
-                Let's Discuss Your Project
-              </Link>
-              <Link
-                href="/contact"
-                className={cn(
-                  buttonVariants({ size: "lg", variant: "outline" }),
-                  "h-12 px-6 rounded-full font-semibold bg-white/10 hover:bg-white/15 text-white border-white/10 backdrop-blur-md cursor-pointer flex items-center justify-center"
-                )}
-              >
-                Get a Free Consultation
-              </Link>
+              <div className="mt-10 flex flex-wrap justify-center gap-4">
+                <Link
+                  href="/contact"
+                  className={cn(
+                    buttonVariants({ size: "lg", variant: "default" }),
+                    "h-12 px-6 rounded-full font-semibold bg-blue-600 hover:bg-blue-700 text-white border-0 shadow-lg shadow-blue-500/25 cursor-pointer flex items-center justify-center"
+                  )}
+                >
+                  Let's Discuss Your Project
+                </Link>
+                <Link
+                  href="/contact"
+                  className={cn(
+                    buttonVariants({ size: "lg", variant: "outline" }),
+                    "h-12 px-6 rounded-full font-semibold bg-white/10 hover:bg-white/15 text-white border-white/10 backdrop-blur-md cursor-pointer flex items-center justify-center"
+                  )}
+                >
+                  Get a Free Consultation
+                </Link>
+              </div>
             </div>
-          </div>
+          </ScrollReveal>
         </Container>
       </section>
     </main>

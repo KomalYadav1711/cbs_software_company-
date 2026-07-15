@@ -7,7 +7,7 @@ export function Logo() {
   return (
     <Link
       href="/"
-      className="flex items-center gap-3 font-heading text-xl font-bold tracking-tight text-slate-900 group"
+      className="flex items-center  font-heading text-xl font-bold tracking-tight text-slate-900 group"
     >
       <div className="relative flex h-11 w-11 items-center justify-center">
         {/* SVG C-Ring with hover rotation micro-animation */}
@@ -58,4 +58,4 @@ export function Logo() {
       </span>
     </Link>
   );
-}
+}

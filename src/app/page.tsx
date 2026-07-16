@@ -193,12 +193,12 @@ const TIMELINE_STEPS = [
 
 
 const TECH_CATEGORIES = {
-  Frontend: ["HTML5", "CSS3", "JavaScript", "Bootstrap", "React.js", "Angular", "Vue.js", "Next.js", "Tailwind CSS"],
-  Backend: ["ASP.NET", "PHP", "Laravel", "Node.js", "Python", "Java", "Go", "Ruby on Rails"],
-  Mobile: ["Flutter", "React Native", "Android", "iOS", "Swift", "Kotlin"],
-  Database: ["MySQL", "Microsoft SQL Server", "PostgreSQL", "MongoDB", "Firebase", "Redis"],
+  Frontend: ["HTML5", "CSS3", "JavaScript", "Bootstrap", "React.js", "Angular", "Vue.js"],
+  Backend: ["ASP.NET", "PHP", "Laravel", "Node.js", "Python", "Java"],
+  Mobile: ["Flutter", "React Native", "Android", "iOS"],
+  Database: ["MySQL", "Microsoft SQL Server", "PostgreSQL", "MongoDB", "Firebase"],
   Ecommerce: ["Shopify", "WooCommerce", "Magento", "OpenCart", "Custom Ecommerce Platforms"],
-  "Cloud & DevOps": ["AWS", "Microsoft Azure", "Google Cloud Platform", "Docker", "Git", "GitHub", "CI/CD", "Kubernetes"]
+  "Cloud & DevOps": ["AWS", "Microsoft Azure", "Google Cloud Platform", "Docker", "Git", "GitHub", "CI/CD"]
 };
 
 
@@ -285,6 +285,57 @@ const FAQS = [
   {
     question: "Can you also develop the website after designing it?",
     answer: "Yes. CBS Software provides complete, end-to-end design and development services. We take your project from concept, wireframing, and interactive design prototypes all the way through to deployment, hosting setup, and long-term support."
+  }
+];
+
+const HIGHLIGHTS = [
+  {
+    value: "500+",
+    title: "Successful Projects Delivered",
+    description: "Successfully delivered high-quality software solutions and custom designs.",
+    icon: Briefcase,
+  },
+  {
+    value: "300+",
+    title: "Happy Clients Worldwide",
+    description: "Trusted by companies, startups, and brands across the globe.",
+    icon: Users,
+  },
+  {
+    value: "10+",
+    title: "Years of Industry Experience",
+    description: "A decade of building reliable, scalable, and cutting-edge software solutions.",
+    icon: Award,
+  },
+  {
+    value: "20+",
+    title: "Skilled Technology Experts",
+    description: "A certified team of dedicated UI/UX designers, developers, and consultants.",
+    icon: Laptop,
+  },
+  {
+    value: "98%",
+    title: "Client Satisfaction",
+    description: "Our commitment to excellence translates directly into client success and positive feedback.",
+    icon: ThumbsUp,
+  },
+  {
+    value: "24×7",
+    title: "Technical Support",
+    description: "Round-the-clock assistance and maintenance to keep your services running smoothly.",
+    icon: Clock,
+  },
+  {
+    value: "15+",
+    title: "Industries Served",
+    description: "Deep domain expertise in healthcare, education, retail, finance, and more.",
+    icon: Building2,
+  },
+  {
+    value: "100%",
+    title: "Custom Development Solutions",
+    description: "Tailored software built precisely to match your unique workflow and business goals.",
+    icon: Code2,
   }
 ];
 
@@ -467,6 +518,56 @@ export default function HomePage() {
                 </motion.div>
               ))}
             </div>
+          </div>
+        </Container>
+      </section>
+
+      {/* Company Highlights */}
+      <section className="py-20 bg-white">
+        <Container>
+          <ScrollReveal>
+            <div className="text-center max-w-3xl mx-auto">
+              <span className="text-xs font-bold uppercase tracking-wider text-blue-600 bg-blue-50 px-3.5 py-1.5 rounded-full">
+                Company Highlights
+              </span>
+              <h2 className="font-heading text-3xl md:text-4xl font-extrabold text-slate-900 mt-6 tracking-tight">
+                Delivering Digital Excellence, One Project at a Time
+              </h2>
+              <p className="mt-4 text-slate-600 text-sm sm:text-base leading-relaxed">
+                Our track record speaks for itself. We deliver high-performing solutions that drive real results.
+              </p>
+            </div>
+          </ScrollReveal>
+
+          <div className="mt-16 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 md:gap-8">
+            {HIGHLIGHTS.map((item, idx) => {
+              const Icon = item.icon;
+              return (
+                <ScrollReveal key={item.title} delay={idx * 0.05} duration={0.5}>
+                  <motion.div
+                    whileHover={{ y: -6, scale: 1.02 }}
+                    whileTap={{ scale: 0.98 }}
+                    transition={{ type: "spring", stiffness: 400, damping: 20 }}
+                    className="bg-slate-50/40 hover:bg-white rounded-2xl p-6 border border-slate-100 hover:border-blue-500/20 shadow-sm hover:shadow-lg transition-all duration-300 flex flex-col justify-between h-full group"
+                  >
+                    <div>
+                      <div className="h-10 w-10 rounded-xl bg-blue-50 text-blue-600 flex items-center justify-center mb-5 group-hover:bg-blue-600 group-hover:text-white transition-colors duration-300">
+                        <Icon className="h-5 w-5" />
+                      </div>
+                      <div className="font-heading text-3xl font-black text-blue-600 tracking-tight">
+                        {item.value}
+                      </div>
+                      <h3 className="font-heading text-base font-bold text-slate-800 mt-3 leading-snug group-hover:text-blue-600 transition-colors duration-300">
+                        {item.title}
+                      </h3>
+                      <p className="text-slate-500 text-xs mt-2.5 leading-relaxed">
+                        {item.description}
+                      </p>
+                    </div>
+                  </motion.div>
+                </ScrollReveal>
+              );
+            })}
           </div>
         </Container>
       </section>

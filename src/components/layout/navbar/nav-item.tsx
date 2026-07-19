@@ -40,6 +40,7 @@ export function NavItem({ item, isHovered }: NavItemProps) {
   const pathname = usePathname();
   const active =
     pathname === item.href ||
+    (item.href !== "/" && pathname.startsWith(item.href)) ||
     (item.subItems && item.subItems.some((sub) => pathname === sub.href));
 
   const [isOpen, setIsOpen] = useState(false);

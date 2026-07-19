@@ -46,7 +46,7 @@ export function Navbar() {
 
         <DesktopNav />
 
-        <div className="flex items-center gap-4">
+        <div className="flex items-center gap-3">
           <NavbarActions />
           <MobileToggle open={open} onToggle={toggle} />
         </div>

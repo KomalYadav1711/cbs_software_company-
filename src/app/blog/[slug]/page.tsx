@@ -1,12 +1,13 @@
 "use client";
 
-import { use, useState } from "react";
+import { use, useState, useEffect } from "react";
 import { motion } from "framer-motion";
 import Link from "next/link";
-import { ArrowLeft, Calendar, Clock, Share2, Check, Send } from "lucide-react";
+import { ArrowLeft, Calendar, Clock, Share2, Check, Send, Loader2 } from "lucide-react";
 import { Container } from "@/components/common/container";
 import { BLOG_POSTS } from "@/data/blog-posts";
 import { BlogCard } from "@/components/common/blog-card";
+import { DevToArticle, UnifiedBlogArticle, mapDevToArticle, mapBlogPost } from "@/lib/devto";
 
 interface BlogPostPageProps {
   params: Promise<{ slug: string }>;
@@ -18,10 +19,48 @@ export default function BlogPostDetailPage({ params }: BlogPostPageProps) {
   const [newsletterEmail, setNewsletterEmail] = useState("");
   const [subscribed, setSubscribed] = useState(false);
 
-  // Find current post
-  const post = BLOG_POSTS.find((p) => p.slug === slug);
+  // Check if it exists locally
+  const localPost = BLOG_POSTS.find((p) => p.slug === slug);
 
-  if (!post) {
+  // State for Dev.to article if fetched
+  const [devToArticle, setDevToArticle] = useState<UnifiedBlogArticle | null>(null);
+  const [loading, setLoading] = useState(!localPost && /^\d+$/.test(slug));
+  const [error, setError] = useState(false);
+
+  useEffect(() => {
+    if (!localPost && /^\d+$/.test(slug)) {
+      setLoading(true);
+      setError(false);
+      fetch(`/api/blog/${slug}`)
+        .then((res) => {
+          if (!res.ok) throw new Error("Failed to fetch");
+          return res.json() as Promise<DevToArticle>;
+        })
+        .then((data) => {
+          setDevToArticle(mapDevToArticle(data));
+          setLoading(false);
+        })
+        .catch(() => {
+          setError(true);
+          setLoading(false);
+        });
+    }
+  }, [slug, localPost]);
+
+  const post = localPost ? mapBlogPost(localPost) : devToArticle;
+
+  if (loading) {
+    return (
+      <main className="w-full bg-slate-50/20 text-slate-800 antialiased pt-28 pb-20 min-h-screen flex items-center justify-center">
+        <div className="flex flex-col items-center gap-3">
+          <Loader2 className="h-8 w-8 animate-spin text-blue-600" />
+          <p className="text-sm font-semibold text-slate-500">Loading article...</p>
+        </div>
+      </main>
+    );
+  }
+
+  if (!post || error) {
     return (
       <main className="w-full bg-slate-50/30 min-h-screen pt-36 pb-20 text-center">
         <Container>
@@ -50,7 +89,8 @@ export default function BlogPostDetailPage({ params }: BlogPostPageProps) {
       if (a.category !== post.category && b.category === post.category) return 1;
       return 0;
     })
-    .slice(0, 3);
+    .slice(0, 3)
+    .map(mapBlogPost);
 
   const handleCopyLink = () => {
     if (typeof window !== "undefined") {
@@ -144,18 +184,20 @@ export default function BlogPostDetailPage({ params }: BlogPostPageProps) {
             {/* Main Column */}
             <div className="lg:col-span-8">
               {/* Cover Image */}
-              <div className="relative aspect-[16/9] w-full overflow-hidden rounded-3xl border border-slate-100 bg-slate-100 shadow-lg shadow-slate-100/50 mb-10">
-                <img
-                  src={post.coverImage}
-                  alt={post.title}
-                  className="h-full w-full object-cover"
-                />
-              </div>
+              {post.coverImage && (
+                <div className="relative aspect-[16/9] w-full overflow-hidden rounded-3xl border border-slate-100 bg-slate-100 shadow-lg shadow-slate-100/50 mb-10">
+                  <img
+                    src={post.coverImage}
+                    alt={post.title}
+                    className="h-full w-full object-cover"
+                  />
+                </div>
+              )}
 
               {/* Styled Post content */}
               <div
                 className="blog-content text-slate-700"
-                dangerouslySetInnerHTML={{ __html: post.content }}
+                dangerouslySetInnerHTML={{ __html: post.content || "" }}
               />
 
               {/* Share & Tags Section */}
@@ -269,7 +311,7 @@ export default function BlogPostDetailPage({ params }: BlogPostPageProps) {
             <h2 className="font-heading text-2xl font-bold text-slate-800 mb-8">Related Articles</h2>
             <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
               {relatedPosts.map((rPost, idx) => (
-                <BlogCard key={rPost.slug} post={rPost} index={idx} />
+                <BlogCard key={rPost.slug} article={rPost} index={idx} />
               ))}
             </div>
           </Container>

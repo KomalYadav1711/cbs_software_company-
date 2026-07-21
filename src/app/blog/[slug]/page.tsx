@@ -82,15 +82,16 @@ export default function BlogPostDetailPage({ params }: BlogPostPageProps) {
     );
   }
 
-  // Get related posts (same category, or just other posts, capped at 3)
-  const relatedPosts = BLOG_POSTS.filter((p) => p.slug !== post.slug)
+  // Get related posts from local posts only (always available)
+  const relatedPosts = BLOG_POSTS
+    .map(mapBlogPost)
+    .filter((p) => p.slug !== post.slug)
     .sort((a, b) => {
       if (a.category === post.category && b.category !== post.category) return -1;
       if (a.category !== post.category && b.category === post.category) return 1;
       return 0;
     })
-    .slice(0, 3)
-    .map(mapBlogPost);
+    .slice(0, 3);
 
   const handleCopyLink = () => {
     if (typeof window !== "undefined") {

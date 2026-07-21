@@ -42,7 +42,11 @@ import {
   Scale,
   Handshake,
   Laptop,
-  HeartPulse
+  HeartPulse,
+  Factory,
+  Landmark,
+  Hotel,
+  Coffee
 } from "lucide-react";
 
 
@@ -206,15 +210,19 @@ const INDUSTRIES = [
   { name: "Healthcare", icon: HeartPulse },
   { name: "Education", icon: BookOpen },
   { name: "Real Estate", icon: Building2 },
-  { name: "Retail & eCommerce", icon: ShoppingBag },
-  { name: "Manufacturing", icon: Laptop },
-  { name: "Finance & Banking", icon: Layers },
-  { name: "Hospitality", icon: Utensils },
+  { name: "Retail & Ecommerce", icon: ShoppingBag },
+  { name: "Manufacturing", icon: Factory },
+  { name: "Finance & Banking", icon: Landmark },
+  { name: "Hospitality", icon: Hotel },
   { name: "Travel & Tourism", icon: Plane },
-  { name: "Logistics", icon: Truck },
+  { name: "Logistics & Transportation", icon: Truck },
+  { name: "Restaurants & Cafés", icon: Coffee },
   { name: "Automobile", icon: Car },
   { name: "Legal & Consulting", icon: Scale },
-  { name: "Startups & Scaleups", icon: Rocket }
+  { name: "Startups", icon: Rocket },
+  { name: "Corporate Enterprises", icon: Briefcase },
+  { name: "NGOs", icon: Handshake },
+  { name: "Government Organizations", icon: Shield }
 ];
 
 

@@ -1,15 +1,13 @@
 "use client";
 
-import { useState, useEffect, useMemo } from "react";
-import { useSearchParams } from "next/navigation";
+import { useState, useMemo } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import Link from "next/link";
-import { Search, ArrowRight, FolderOpen, AlertCircle, ShieldAlert, Sparkles } from "lucide-react";
+import { Search, ArrowRight, FolderOpen, Sparkles } from "lucide-react";
 import { Container } from "@/components/common/container";
 import { ScrollReveal } from "@/components/common/scroll-reveal";
 import { Button } from "@/components/ui/button";
-import { PORTFOLIO_ITEMS, PortfolioItem } from "@/data/portfolio-items";
-import { ProjectDrawer } from "./project-drawer";
+import { PORTFOLIO_ITEMS } from "@/data/portfolio-items";
 
 const CATEGORIES = [
   "All",
@@ -21,51 +19,10 @@ const CATEGORIES = [
 ];
 
 export function PortfolioClient() {
-  const searchParams = useSearchParams();
   const [selectedCategory, setSelectedCategory] = useState("All");
   const [searchQuery, setSearchQuery] = useState("");
-  const [activeProject, setActiveProject] = useState<PortfolioItem | null>(null);
-  const [isDrawerOpen, setIsDrawerOpen] = useState(false);
 
-  // Sync state from query parameters on mount or parameter changes
-  useEffect(() => {
-    const projectSlug = searchParams.get("project");
-    if (projectSlug) {
-      const match = PORTFOLIO_ITEMS.find((item) => item.id === projectSlug);
-      if (match) {
-        setActiveProject(match);
-        setIsDrawerOpen(true);
-      }
-    }
-  }, [searchParams]);
-
-  // Update URL parameter when active project changes
-  const handleOpenDrawer = (item: PortfolioItem) => {
-    setActiveProject(item);
-    setIsDrawerOpen(true);
-
-    const params = new URLSearchParams(window.location.search);
-    params.set("project", item.id);
-    const newUrl = `${window.location.pathname}?${params.toString()}`;
-    window.history.pushState({ path: newUrl }, "", newUrl);
-  };
-
-  const handleCloseDrawer = () => {
-    setIsDrawerOpen(false);
-    
-    // Clean query parameter
-    const params = new URLSearchParams(window.location.search);
-    params.delete("project");
-    const newUrl = window.location.pathname;
-    window.history.pushState({ path: newUrl }, "", newUrl);
-
-    // Keep activeProject temporarily to avoid immediate layout pop on animation exit
-    setTimeout(() => {
-      if (!isDrawerOpen) setActiveProject(null);
-    }, 300);
-  };
-
-  // Filtered portfolio items
+  // Filtered portfolio items based on category and search query
   const filteredItems = useMemo(() => {
     return PORTFOLIO_ITEMS.filter((item) => {
       const matchesCategory =
@@ -194,73 +151,77 @@ export function PortfolioClient() {
                 className="grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-3"
               >
                 {filteredItems.map((item, index) => (
-                  <motion.article
+                  <motion.div
                     layout
                     initial={{ opacity: 0, scale: 0.95 }}
                     animate={{ opacity: 1, scale: 1 }}
                     exit={{ opacity: 0, scale: 0.95 }}
                     transition={{ duration: 0.35, delay: index * 0.04 }}
                     key={item.id}
-                    onClick={() => handleOpenDrawer(item)}
-                    className="group flex flex-col overflow-hidden rounded-2xl border border-slate-100 bg-white shadow-sm transition-all duration-300 hover:-translate-y-2 hover:shadow-xl hover:shadow-slate-100/80 cursor-pointer"
                   >
-                    {/* Visual Cover */}
-                    <div className="relative aspect-[16/10] w-full overflow-hidden bg-slate-50">
-                      <img
-                        src={item.coverImage}
-                        alt={item.title}
-                        className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
-                      />
-                      <span className="absolute top-4 left-4 rounded-full bg-slate-900/75 backdrop-blur-md px-3.5 py-1 text-[10px] font-bold uppercase tracking-wider text-white border border-white/10">
-                        {item.category}
-                      </span>
-                    </div>
-
-                    {/* Content Area */}
-                    <div className="flex flex-1 flex-col p-6">
-                      <span className="text-[10px] font-bold uppercase tracking-wider text-slate-400">
-                        {item.client}
-                      </span>
-                      <h3 className="mt-2 font-heading text-lg font-bold text-slate-900 transition-colors group-hover:text-blue-600 line-clamp-1">
-                        {item.title}
-                      </h3>
-                      <p className="mt-3 text-xs leading-relaxed text-slate-500 line-clamp-2">
-                        {item.shortDescription}
-                      </p>
-
-                      {/* Prime Metric Highlight */}
-                      <div className="mt-4 flex items-center justify-between border-t border-slate-100 pt-4">
-                        <div>
-                          <p className="font-heading text-lg font-black text-blue-600 leading-none">
-                            {item.metrics[0].value}
-                          </p>
-                          <p className="text-[9px] font-bold uppercase tracking-wider text-slate-400 mt-1">
-                            {item.metrics[0].label}
-                          </p>
-                        </div>
-                        <div className="flex h-8 w-8 items-center justify-center rounded-full bg-slate-50 text-slate-600 transition-all duration-300 group-hover:bg-blue-600 group-hover:text-white">
-                          <ArrowRight className="h-4 w-4" />
-                        </div>
+                    <Link
+                      href={`/portfolio/${item.id}`}
+                      className="group flex flex-col h-full overflow-hidden rounded-2xl border border-slate-100 bg-white shadow-sm transition-all duration-300 hover:-translate-y-1.5 hover:shadow-xl hover:shadow-slate-100/80 cursor-pointer"
+                    >
+                      {/* Visual Cover */}
+                      <div className="relative aspect-[16/10] w-full overflow-hidden bg-slate-50">
+                        <img
+                          src={item.coverImage}
+                          alt={item.title}
+                          className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
+                          loading="lazy"
+                        />
+                        <span className="absolute top-4 left-4 rounded-full bg-slate-900/75 backdrop-blur-md px-3.5 py-1 text-[10px] font-bold uppercase tracking-wider text-white border border-white/10">
+                          {item.category}
+                        </span>
                       </div>
 
-                      {/* Tech Stack Previews */}
-                      <div className="mt-4 flex flex-wrap gap-1">
-                        {item.technologies.slice(0, 3).map((tech) => (
-                          <span
-                            key={tech}
-                            className="rounded bg-slate-50 px-2 py-0.5 text-[9px] font-semibold text-slate-500 border border-slate-100"
-                          >
-                            {tech}
-                          </span>
-                        ))}
-                        {item.technologies.length > 3 && (
-                          <span className="rounded bg-slate-50 px-2 py-0.5 text-[9px] font-semibold text-slate-400 border border-slate-100">
-                            +{item.technologies.length - 3} more
-                          </span>
-                        )}
+                      {/* Content Area */}
+                      <div className="flex flex-1 flex-col p-6">
+                        <span className="text-[10px] font-bold uppercase tracking-wider text-slate-400">
+                          {item.client}
+                        </span>
+                        <h3 className="mt-2 font-heading text-lg font-bold text-slate-900 transition-colors group-hover:text-blue-600 line-clamp-1">
+                          {item.title}
+                        </h3>
+                        <p className="mt-3 text-xs leading-relaxed text-slate-500 line-clamp-2">
+                          {item.shortDescription}
+                        </p>
+
+                        {/* Prime Metric Highlight */}
+                        <div className="mt-4 flex items-center justify-between border-t border-slate-100 pt-4">
+                          <div>
+                            <p className="font-heading text-lg font-black text-blue-600 leading-none">
+                              {item.metrics[0].value}
+                            </p>
+                            <p className="text-[9px] font-bold uppercase tracking-wider text-slate-400 mt-1">
+                              {item.metrics[0].label}
+                            </p>
+                          </div>
+                          <div className="flex h-8 w-8 items-center justify-center rounded-full bg-slate-50 text-slate-600 transition-all duration-300 group-hover:bg-blue-600 group-hover:text-white">
+                            <ArrowRight className="h-4 w-4" />
+                          </div>
+                        </div>
+
+                        {/* Tech Stack Previews */}
+                        <div className="mt-4 flex flex-wrap gap-1">
+                          {item.technologies.slice(0, 3).map((tech) => (
+                            <span
+                              key={tech}
+                              className="rounded bg-slate-50 px-2 py-0.5 text-[9px] font-semibold text-slate-500 border border-slate-100"
+                            >
+                              {tech}
+                            </span>
+                          ))}
+                          {item.technologies.length > 3 && (
+                            <span className="rounded bg-slate-50 px-2 py-0.5 text-[9px] font-semibold text-slate-400 border border-slate-100">
+                              +{item.technologies.length - 3} more
+                            </span>
+                          )}
+                        </div>
                       </div>
-                    </div>
-                  </motion.article>
+                    </Link>
+                  </motion.div>
                 ))}
               </motion.div>
             ) : (
@@ -332,13 +293,6 @@ export function PortfolioClient() {
           </div>
         </Container>
       </section>
-
-      {/* Slide-over details drawer */}
-      <ProjectDrawer
-        item={activeProject}
-        isOpen={isDrawerOpen}
-        onClose={handleCloseDrawer}
-      />
     </main>
   );
 }

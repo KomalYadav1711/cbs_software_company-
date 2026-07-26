@@ -41,7 +41,7 @@ export function PortfolioClient() {
   }, [selectedCategory, searchQuery]);
 
   return (
-    <main className="w-full bg-slate-50/20 text-slate-800 antialiased pt-28">
+    <main className="w-full bg-slate-50/20 text-slate-800 antialiased pt-27">
       {/* Hero Section */}
       <section className="relative py-20 overflow-hidden bg-slate-900 text-white">
         <div className="absolute inset-0 -z-10 overflow-hidden">

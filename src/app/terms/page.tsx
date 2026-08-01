@@ -1,6 +1,6 @@
 "use client";
 
-import { motion, useScroll, useSpring } from "framer-motion";
+import { motion, useScroll, useSpring, type Variants } from "framer-motion";
 import Link from "next/link";
 import { Container } from "@/components/common/container";
 import {
@@ -714,12 +714,12 @@ const SECTIONS: Section[] = [
   },
 ];
 
-const fadeUp = {
+const fadeUp: Variants = {
   hidden: { opacity: 0, y: 24 },
   visible: (i: number) => ({
     opacity: 1,
     y: 0,
-    transition: { duration: 0.5, delay: i * 0.04, ease: [0.22, 1, 0.36, 1] },
+    transition: { duration: 0.5, delay: i * 0.04 },
   }),
 };
 
